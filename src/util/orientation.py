@@ -32,15 +32,14 @@ class Orientation:
 # This function lets you make any location the center of the world.
 # For example, set center to your car's location and ori to your car's orientation, then the target will be
 # relative to your car!
-def relative_location(center: Vec3, ori: Orientation, target: Vec3) -> Vec3:
+def relative_location(center, ori, target):
     """
-    Returns target as a relative location from center's point of view, using the given orientation. The components of
-    the returned vector describes:
+    Converts a world-space location into a location relative to a car's orientation.
+    """
+    # Ensure both center and target are Vec3 instances
+    center = Vec3(center)
+    target = Vec3(target)
 
-    * x: how far in front
-    * y: how far right
-    * z: how far above
-    """
     x = (target - center).dot(ori.forward)
     y = (target - center).dot(ori.right)
     z = (target - center).dot(ori.up)
